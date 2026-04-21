@@ -57,12 +57,20 @@ export function ToolRunner({
     setOutput("");
     try {
       const finalPrompt = promptBuilder ? promptBuilder(input) : input;
-      const res = await generate({
+      const raw = await generate({
         data: { tool, prompt: finalPrompt, ...extraOptions } as never,
       });
+      // TanStack Start may wrap server-fn results in { result }
+      const res = (raw && typeof raw === "object" && "result" in (raw as object)
+        ? (raw as { result: { output: string; id?: string; pointsUsed: number } }).result
+        : (raw as { output: string; id?: string; pointsUsed: number }));
+      if (!res || typeof res.output !== "string") {
+        console.error("Unexpected server-fn response:", raw);
+        throw new Error("استجابة غير متوقعة من الخادم");
+      }
       setOutput(res.output);
       setOutputId(res.id ?? null);
-      toast.success(`تم! استُهلك ${res.pointsUsed} نقطة`);
+      toast.success(`تم! استُهلك ${res.pointsUsed ?? cost} نقطة`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "حدث خطأ");
     } finally {
