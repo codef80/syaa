@@ -9,38 +9,404 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TemplatesRouteImport } from './routes/templates'
+import { Route as StudioRouteImport } from './routes/studio'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as InspirationRouteImport } from './routes/inspiration'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as BillingRouteImport } from './routes/billing'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ToolsIndexRouteImport } from './routes/tools.index'
+import { Route as ToolsWeeklyPlanRouteImport } from './routes/tools.weekly-plan'
+import { Route as ToolsUrlAnalyzerRouteImport } from './routes/tools.url-analyzer'
+import { Route as ToolsTransformerRouteImport } from './routes/tools.transformer'
+import { Route as ToolsSmartReplyRouteImport } from './routes/tools.smart-reply'
+import { Route as ToolsShortenerRouteImport } from './routes/tools.shortener'
+import { Route as ToolsSeoRouteImport } from './routes/tools.seo'
+import { Route as ToolsRewriteRouteImport } from './routes/tools.rewrite'
+import { Route as ToolsProofreadRouteImport } from './routes/tools.proofread'
+import { Route as ToolsOfferPackRouteImport } from './routes/tools.offer-pack'
+import { Route as ToolsHooksRouteImport } from './routes/tools.hooks'
+import { Route as ToolsDialectRouteImport } from './routes/tools.dialect'
+import { Route as ToolsCtaRouteImport } from './routes/tools.cta'
+import { Route as ToolsAbVariantsRouteImport } from './routes/tools.ab-variants'
 
+const TemplatesRoute = TemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InspirationRoute = InspirationRouteImport.update({
+  id: '/inspiration',
+  path: '/inspiration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BillingRoute = BillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsIndexRoute = ToolsIndexRouteImport.update({
+  id: '/tools/',
+  path: '/tools/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsWeeklyPlanRoute = ToolsWeeklyPlanRouteImport.update({
+  id: '/tools/weekly-plan',
+  path: '/tools/weekly-plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsUrlAnalyzerRoute = ToolsUrlAnalyzerRouteImport.update({
+  id: '/tools/url-analyzer',
+  path: '/tools/url-analyzer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsTransformerRoute = ToolsTransformerRouteImport.update({
+  id: '/tools/transformer',
+  path: '/tools/transformer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsSmartReplyRoute = ToolsSmartReplyRouteImport.update({
+  id: '/tools/smart-reply',
+  path: '/tools/smart-reply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsShortenerRoute = ToolsShortenerRouteImport.update({
+  id: '/tools/shortener',
+  path: '/tools/shortener',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsSeoRoute = ToolsSeoRouteImport.update({
+  id: '/tools/seo',
+  path: '/tools/seo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsRewriteRoute = ToolsRewriteRouteImport.update({
+  id: '/tools/rewrite',
+  path: '/tools/rewrite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsProofreadRoute = ToolsProofreadRouteImport.update({
+  id: '/tools/proofread',
+  path: '/tools/proofread',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsOfferPackRoute = ToolsOfferPackRouteImport.update({
+  id: '/tools/offer-pack',
+  path: '/tools/offer-pack',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsHooksRoute = ToolsHooksRouteImport.update({
+  id: '/tools/hooks',
+  path: '/tools/hooks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsDialectRoute = ToolsDialectRouteImport.update({
+  id: '/tools/dialect',
+  path: '/tools/dialect',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsCtaRoute = ToolsCtaRouteImport.update({
+  id: '/tools/cta',
+  path: '/tools/cta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsAbVariantsRoute = ToolsAbVariantsRouteImport.update({
+  id: '/tools/ab-variants',
+  path: '/tools/ab-variants',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/billing': typeof BillingRoute
+  '/dashboard': typeof DashboardRoute
+  '/inspiration': typeof InspirationRoute
+  '/products': typeof ProductsRoute
+  '/settings': typeof SettingsRoute
+  '/studio': typeof StudioRoute
+  '/templates': typeof TemplatesRoute
+  '/tools/ab-variants': typeof ToolsAbVariantsRoute
+  '/tools/cta': typeof ToolsCtaRoute
+  '/tools/dialect': typeof ToolsDialectRoute
+  '/tools/hooks': typeof ToolsHooksRoute
+  '/tools/offer-pack': typeof ToolsOfferPackRoute
+  '/tools/proofread': typeof ToolsProofreadRoute
+  '/tools/rewrite': typeof ToolsRewriteRoute
+  '/tools/seo': typeof ToolsSeoRoute
+  '/tools/shortener': typeof ToolsShortenerRoute
+  '/tools/smart-reply': typeof ToolsSmartReplyRoute
+  '/tools/transformer': typeof ToolsTransformerRoute
+  '/tools/url-analyzer': typeof ToolsUrlAnalyzerRoute
+  '/tools/weekly-plan': typeof ToolsWeeklyPlanRoute
+  '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/billing': typeof BillingRoute
+  '/dashboard': typeof DashboardRoute
+  '/inspiration': typeof InspirationRoute
+  '/products': typeof ProductsRoute
+  '/settings': typeof SettingsRoute
+  '/studio': typeof StudioRoute
+  '/templates': typeof TemplatesRoute
+  '/tools/ab-variants': typeof ToolsAbVariantsRoute
+  '/tools/cta': typeof ToolsCtaRoute
+  '/tools/dialect': typeof ToolsDialectRoute
+  '/tools/hooks': typeof ToolsHooksRoute
+  '/tools/offer-pack': typeof ToolsOfferPackRoute
+  '/tools/proofread': typeof ToolsProofreadRoute
+  '/tools/rewrite': typeof ToolsRewriteRoute
+  '/tools/seo': typeof ToolsSeoRoute
+  '/tools/shortener': typeof ToolsShortenerRoute
+  '/tools/smart-reply': typeof ToolsSmartReplyRoute
+  '/tools/transformer': typeof ToolsTransformerRoute
+  '/tools/url-analyzer': typeof ToolsUrlAnalyzerRoute
+  '/tools/weekly-plan': typeof ToolsWeeklyPlanRoute
+  '/tools': typeof ToolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/billing': typeof BillingRoute
+  '/dashboard': typeof DashboardRoute
+  '/inspiration': typeof InspirationRoute
+  '/products': typeof ProductsRoute
+  '/settings': typeof SettingsRoute
+  '/studio': typeof StudioRoute
+  '/templates': typeof TemplatesRoute
+  '/tools/ab-variants': typeof ToolsAbVariantsRoute
+  '/tools/cta': typeof ToolsCtaRoute
+  '/tools/dialect': typeof ToolsDialectRoute
+  '/tools/hooks': typeof ToolsHooksRoute
+  '/tools/offer-pack': typeof ToolsOfferPackRoute
+  '/tools/proofread': typeof ToolsProofreadRoute
+  '/tools/rewrite': typeof ToolsRewriteRoute
+  '/tools/seo': typeof ToolsSeoRoute
+  '/tools/shortener': typeof ToolsShortenerRoute
+  '/tools/smart-reply': typeof ToolsSmartReplyRoute
+  '/tools/transformer': typeof ToolsTransformerRoute
+  '/tools/url-analyzer': typeof ToolsUrlAnalyzerRoute
+  '/tools/weekly-plan': typeof ToolsWeeklyPlanRoute
+  '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/billing'
+    | '/dashboard'
+    | '/inspiration'
+    | '/products'
+    | '/settings'
+    | '/studio'
+    | '/templates'
+    | '/tools/ab-variants'
+    | '/tools/cta'
+    | '/tools/dialect'
+    | '/tools/hooks'
+    | '/tools/offer-pack'
+    | '/tools/proofread'
+    | '/tools/rewrite'
+    | '/tools/seo'
+    | '/tools/shortener'
+    | '/tools/smart-reply'
+    | '/tools/transformer'
+    | '/tools/url-analyzer'
+    | '/tools/weekly-plan'
+    | '/tools/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/billing'
+    | '/dashboard'
+    | '/inspiration'
+    | '/products'
+    | '/settings'
+    | '/studio'
+    | '/templates'
+    | '/tools/ab-variants'
+    | '/tools/cta'
+    | '/tools/dialect'
+    | '/tools/hooks'
+    | '/tools/offer-pack'
+    | '/tools/proofread'
+    | '/tools/rewrite'
+    | '/tools/seo'
+    | '/tools/shortener'
+    | '/tools/smart-reply'
+    | '/tools/transformer'
+    | '/tools/url-analyzer'
+    | '/tools/weekly-plan'
+    | '/tools'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/billing'
+    | '/dashboard'
+    | '/inspiration'
+    | '/products'
+    | '/settings'
+    | '/studio'
+    | '/templates'
+    | '/tools/ab-variants'
+    | '/tools/cta'
+    | '/tools/dialect'
+    | '/tools/hooks'
+    | '/tools/offer-pack'
+    | '/tools/proofread'
+    | '/tools/rewrite'
+    | '/tools/seo'
+    | '/tools/shortener'
+    | '/tools/smart-reply'
+    | '/tools/transformer'
+    | '/tools/url-analyzer'
+    | '/tools/weekly-plan'
+    | '/tools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
+  BillingRoute: typeof BillingRoute
+  DashboardRoute: typeof DashboardRoute
+  InspirationRoute: typeof InspirationRoute
+  ProductsRoute: typeof ProductsRoute
+  SettingsRoute: typeof SettingsRoute
+  StudioRoute: typeof StudioRoute
+  TemplatesRoute: typeof TemplatesRoute
+  ToolsAbVariantsRoute: typeof ToolsAbVariantsRoute
+  ToolsCtaRoute: typeof ToolsCtaRoute
+  ToolsDialectRoute: typeof ToolsDialectRoute
+  ToolsHooksRoute: typeof ToolsHooksRoute
+  ToolsOfferPackRoute: typeof ToolsOfferPackRoute
+  ToolsProofreadRoute: typeof ToolsProofreadRoute
+  ToolsRewriteRoute: typeof ToolsRewriteRoute
+  ToolsSeoRoute: typeof ToolsSeoRoute
+  ToolsShortenerRoute: typeof ToolsShortenerRoute
+  ToolsSmartReplyRoute: typeof ToolsSmartReplyRoute
+  ToolsTransformerRoute: typeof ToolsTransformerRoute
+  ToolsUrlAnalyzerRoute: typeof ToolsUrlAnalyzerRoute
+  ToolsWeeklyPlanRoute: typeof ToolsWeeklyPlanRoute
+  ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/templates': {
+      id: '/templates'
+      path: '/templates'
+      fullPath: '/templates'
+      preLoaderRoute: typeof TemplatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inspiration': {
+      id: '/inspiration'
+      path: '/inspiration'
+      fullPath: '/inspiration'
+      preLoaderRoute: typeof InspirationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/billing': {
+      id: '/billing'
+      path: '/billing'
+      fullPath: '/billing'
+      preLoaderRoute: typeof BillingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +414,132 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/': {
+      id: '/tools/'
+      path: '/tools'
+      fullPath: '/tools/'
+      preLoaderRoute: typeof ToolsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/weekly-plan': {
+      id: '/tools/weekly-plan'
+      path: '/tools/weekly-plan'
+      fullPath: '/tools/weekly-plan'
+      preLoaderRoute: typeof ToolsWeeklyPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/url-analyzer': {
+      id: '/tools/url-analyzer'
+      path: '/tools/url-analyzer'
+      fullPath: '/tools/url-analyzer'
+      preLoaderRoute: typeof ToolsUrlAnalyzerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/transformer': {
+      id: '/tools/transformer'
+      path: '/tools/transformer'
+      fullPath: '/tools/transformer'
+      preLoaderRoute: typeof ToolsTransformerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/smart-reply': {
+      id: '/tools/smart-reply'
+      path: '/tools/smart-reply'
+      fullPath: '/tools/smart-reply'
+      preLoaderRoute: typeof ToolsSmartReplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/shortener': {
+      id: '/tools/shortener'
+      path: '/tools/shortener'
+      fullPath: '/tools/shortener'
+      preLoaderRoute: typeof ToolsShortenerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/seo': {
+      id: '/tools/seo'
+      path: '/tools/seo'
+      fullPath: '/tools/seo'
+      preLoaderRoute: typeof ToolsSeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/rewrite': {
+      id: '/tools/rewrite'
+      path: '/tools/rewrite'
+      fullPath: '/tools/rewrite'
+      preLoaderRoute: typeof ToolsRewriteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/proofread': {
+      id: '/tools/proofread'
+      path: '/tools/proofread'
+      fullPath: '/tools/proofread'
+      preLoaderRoute: typeof ToolsProofreadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/offer-pack': {
+      id: '/tools/offer-pack'
+      path: '/tools/offer-pack'
+      fullPath: '/tools/offer-pack'
+      preLoaderRoute: typeof ToolsOfferPackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/hooks': {
+      id: '/tools/hooks'
+      path: '/tools/hooks'
+      fullPath: '/tools/hooks'
+      preLoaderRoute: typeof ToolsHooksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/dialect': {
+      id: '/tools/dialect'
+      path: '/tools/dialect'
+      fullPath: '/tools/dialect'
+      preLoaderRoute: typeof ToolsDialectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/cta': {
+      id: '/tools/cta'
+      path: '/tools/cta'
+      fullPath: '/tools/cta'
+      preLoaderRoute: typeof ToolsCtaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/ab-variants': {
+      id: '/tools/ab-variants'
+      path: '/tools/ab-variants'
+      fullPath: '/tools/ab-variants'
+      preLoaderRoute: typeof ToolsAbVariantsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
+  BillingRoute: BillingRoute,
+  DashboardRoute: DashboardRoute,
+  InspirationRoute: InspirationRoute,
+  ProductsRoute: ProductsRoute,
+  SettingsRoute: SettingsRoute,
+  StudioRoute: StudioRoute,
+  TemplatesRoute: TemplatesRoute,
+  ToolsAbVariantsRoute: ToolsAbVariantsRoute,
+  ToolsCtaRoute: ToolsCtaRoute,
+  ToolsDialectRoute: ToolsDialectRoute,
+  ToolsHooksRoute: ToolsHooksRoute,
+  ToolsOfferPackRoute: ToolsOfferPackRoute,
+  ToolsProofreadRoute: ToolsProofreadRoute,
+  ToolsRewriteRoute: ToolsRewriteRoute,
+  ToolsSeoRoute: ToolsSeoRoute,
+  ToolsShortenerRoute: ToolsShortenerRoute,
+  ToolsSmartReplyRoute: ToolsSmartReplyRoute,
+  ToolsTransformerRoute: ToolsTransformerRoute,
+  ToolsUrlAnalyzerRoute: ToolsUrlAnalyzerRoute,
+  ToolsWeeklyPlanRoute: ToolsWeeklyPlanRoute,
+  ToolsIndexRoute: ToolsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
