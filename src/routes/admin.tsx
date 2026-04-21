@@ -181,8 +181,8 @@ function Admin() {
     if (!editUser) return;
     const { error } = await supabase.rpc("admin_update_profile", {
       _target_user_id: editUser.id,
-      _display_name: editUser.display_name,
-      _email: editUser.email,
+      _display_name: editUser.display_name ?? "",
+      _email: editUser.email ?? "",
     });
     if (error) return toast.error(error.message);
     toast.success("تم تحديث البيانات");
