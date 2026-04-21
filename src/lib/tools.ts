@@ -37,21 +37,21 @@ export const TOOL_COSTS: Record<ToolKey, number> = {
 };
 
 export const TOOL_MODELS: Record<ToolKey, "flash" | "pro"> = {
-  url_analyzer_short: "pro",
+  url_analyzer_short: "flash",
   url_analyzer_pro: "pro",
-  magic_transformer: "pro",
-  hook_generator: "pro",
-  smart_reply: "pro",
-  dialect_switcher: "pro",
-  cta_generator: "pro",
-  ab_variants: "pro",
-  seo_local: "pro",
+  magic_transformer: "flash",
+  hook_generator: "flash",
+  smart_reply: "flash",
+  dialect_switcher: "flash",
+  cta_generator: "flash",
+  ab_variants: "flash",
+  seo_local: "flash",
   offer_pack: "pro",
   weekly_plan: "pro",
   proofread: "flash",
   shortener: "flash",
   rewrite_light: "flash",
-  studio_generate: "pro",
+  studio_generate: "flash",
 };
 
 export const TOOL_LABELS: Record<ToolKey, string> = {
