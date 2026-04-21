@@ -131,6 +131,7 @@ export const generateContent = createServerFn({ method: "POST" })
     // 3. Call AI
     let output: string;
     try {
+      console.log(`[generate] calling AI model=${model}`);
       output = await callLovableAI(
         [
           { role: "system", content: sysPrompt },
@@ -138,7 +139,9 @@ export const generateContent = createServerFn({ method: "POST" })
         ],
         model,
       );
+      console.log(`[generate] AI returned ${output.length} chars`);
     } catch (err) {
+      console.error("[generate] AI call failed:", err);
       // Refund points on failure
       await supabase.rpc("grant_points", {
         _user_id: userId,
@@ -146,7 +149,8 @@ export const generateContent = createServerFn({ method: "POST" })
         _type: "refund",
         _description: `استرداد بسبب فشل: ${TOOL_LABELS[tool] ?? tool}`,
       });
-      throw err;
+      const msg = err instanceof Error ? err.message : "فشل توليد المحتوى";
+      throw new Error(msg);
     }
 
     // 4. Save output
