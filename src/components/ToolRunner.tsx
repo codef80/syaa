@@ -57,11 +57,11 @@ export function ToolRunner({
     setOutput("");
     try {
       const finalPrompt = promptBuilder ? promptBuilder(input) : input;
-      const raw = await generate({
+      const raw = (await generate({
         data: { tool, prompt: finalPrompt, ...extraOptions } as never,
-      });
+      })) as unknown;
       // TanStack Start may wrap server-fn results in { result }
-      const res = (raw && typeof raw === "object" && "result" in (raw as object)
+      const res = (raw && typeof raw === "object" && "result" in (raw as Record<string, unknown>)
         ? (raw as { result: { output: string; id?: string; pointsUsed: number } }).result
         : (raw as { output: string; id?: string; pointsUsed: number }));
       if (!res || typeof res.output !== "string") {
