@@ -604,7 +604,7 @@ function Admin() {
       <AlertDialog open={!!deleteUser} onOpenChange={(o) => !o && setDeleteUser(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>حذف المستخدم نهائياً؟</AlertdialogTitle as any />
+            <AlertDialogTitle>حذف المستخدم نهائياً؟</AlertDialogTitle>
             <AlertDialogDescription>
               سيتم حذف <strong>{deleteUser?.email}</strong> وجميع بياناته (محتوى، نقاط، قوالب، طلبات) بشكل نهائي ولا يمكن التراجع.
             </AlertDialogDescription>
