@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TemplatesRouteImport } from './routes/templates'
 import { Route as StudioRouteImport } from './routes/studio'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as InspirationRouteImport } from './routes/inspiration'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as BillingRouteImport } from './routes/billing'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as ToolsWeeklyPlanRouteImport } from './routes/tools.weekly-plan'
@@ -28,9 +34,29 @@ import { Route as ToolsDialectRouteImport } from './routes/tools.dialect'
 import { Route as ToolsCtaRouteImport } from './routes/tools.cta'
 import { Route as ToolsAbVariantsRouteImport } from './routes/tools.ab-variants'
 
+const TemplatesRoute = TemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudioRoute = StudioRouteImport.update({
   id: '/studio',
   path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InspirationRoute = InspirationRouteImport.update({
+  id: '/inspiration',
+  path: '/inspiration',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -38,9 +64,19 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BillingRoute = BillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -121,9 +157,15 @@ const ToolsAbVariantsRoute = ToolsAbVariantsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/billing': typeof BillingRoute
   '/dashboard': typeof DashboardRoute
+  '/inspiration': typeof InspirationRoute
+  '/products': typeof ProductsRoute
+  '/settings': typeof SettingsRoute
   '/studio': typeof StudioRoute
+  '/templates': typeof TemplatesRoute
   '/tools/ab-variants': typeof ToolsAbVariantsRoute
   '/tools/cta': typeof ToolsCtaRoute
   '/tools/dialect': typeof ToolsDialectRoute
@@ -141,9 +183,15 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/billing': typeof BillingRoute
   '/dashboard': typeof DashboardRoute
+  '/inspiration': typeof InspirationRoute
+  '/products': typeof ProductsRoute
+  '/settings': typeof SettingsRoute
   '/studio': typeof StudioRoute
+  '/templates': typeof TemplatesRoute
   '/tools/ab-variants': typeof ToolsAbVariantsRoute
   '/tools/cta': typeof ToolsCtaRoute
   '/tools/dialect': typeof ToolsDialectRoute
@@ -162,9 +210,15 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/billing': typeof BillingRoute
   '/dashboard': typeof DashboardRoute
+  '/inspiration': typeof InspirationRoute
+  '/products': typeof ProductsRoute
+  '/settings': typeof SettingsRoute
   '/studio': typeof StudioRoute
+  '/templates': typeof TemplatesRoute
   '/tools/ab-variants': typeof ToolsAbVariantsRoute
   '/tools/cta': typeof ToolsCtaRoute
   '/tools/dialect': typeof ToolsDialectRoute
@@ -184,9 +238,15 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/auth'
+    | '/billing'
     | '/dashboard'
+    | '/inspiration'
+    | '/products'
+    | '/settings'
     | '/studio'
+    | '/templates'
     | '/tools/ab-variants'
     | '/tools/cta'
     | '/tools/dialect'
@@ -204,9 +264,15 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/auth'
+    | '/billing'
     | '/dashboard'
+    | '/inspiration'
+    | '/products'
+    | '/settings'
     | '/studio'
+    | '/templates'
     | '/tools/ab-variants'
     | '/tools/cta'
     | '/tools/dialect'
@@ -224,9 +290,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/auth'
+    | '/billing'
     | '/dashboard'
+    | '/inspiration'
+    | '/products'
+    | '/settings'
     | '/studio'
+    | '/templates'
     | '/tools/ab-variants'
     | '/tools/cta'
     | '/tools/dialect'
@@ -245,9 +317,15 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
+  BillingRoute: typeof BillingRoute
   DashboardRoute: typeof DashboardRoute
+  InspirationRoute: typeof InspirationRoute
+  ProductsRoute: typeof ProductsRoute
+  SettingsRoute: typeof SettingsRoute
   StudioRoute: typeof StudioRoute
+  TemplatesRoute: typeof TemplatesRoute
   ToolsAbVariantsRoute: typeof ToolsAbVariantsRoute
   ToolsCtaRoute: typeof ToolsCtaRoute
   ToolsDialectRoute: typeof ToolsDialectRoute
@@ -266,11 +344,39 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/templates': {
+      id: '/templates'
+      path: '/templates'
+      fullPath: '/templates'
+      preLoaderRoute: typeof TemplatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/studio': {
       id: '/studio'
       path: '/studio'
       fullPath: '/studio'
       preLoaderRoute: typeof StudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inspiration': {
+      id: '/inspiration'
+      path: '/inspiration'
+      fullPath: '/inspiration'
+      preLoaderRoute: typeof InspirationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -280,11 +386,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/billing': {
+      id: '/billing'
+      path: '/billing'
+      fullPath: '/billing'
+      preLoaderRoute: typeof BillingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -397,9 +517,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
+  BillingRoute: BillingRoute,
   DashboardRoute: DashboardRoute,
+  InspirationRoute: InspirationRoute,
+  ProductsRoute: ProductsRoute,
+  SettingsRoute: SettingsRoute,
   StudioRoute: StudioRoute,
+  TemplatesRoute: TemplatesRoute,
   ToolsAbVariantsRoute: ToolsAbVariantsRoute,
   ToolsCtaRoute: ToolsCtaRoute,
   ToolsDialectRoute: ToolsDialectRoute,
@@ -418,3 +544,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
