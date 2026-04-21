@@ -27,10 +27,15 @@ async function callLovableAI(messages: AIChatMessage[], model: string): Promise<
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ model, messages }),
+      // Workers cap at ~30s; AI Gateway can be slower for Pro reasoning models
+      signal: AbortSignal.timeout(45000),
     });
   } catch (fetchErr) {
     console.error("[AI] fetch failed:", fetchErr);
-    throw new Error("تعذّر الاتصال بخدمة الذكاء الاصطناعي");
+    const msg = fetchErr instanceof Error && fetchErr.name === "TimeoutError"
+      ? "انتهت مهلة الاستجابة من خدمة الذكاء الاصطناعي، حاول مرة أخرى"
+      : "تعذّر الاتصال بخدمة الذكاء الاصطناعي";
+    throw new Error(msg);
   }
 
   if (res.status === 429) throw new Error("تم تجاوز حد الطلبات، حاول بعد قليل");
