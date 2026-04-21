@@ -331,6 +331,25 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_adjust_points: {
+        Args: { _delta: number; _description: string; _target_user_id: string }
+        Returns: undefined
+      }
+      admin_delete_user: {
+        Args: { _target_user_id: string }
+        Returns: undefined
+      }
+      admin_set_role: {
+        Args: {
+          _new_role: Database["public"]["Enums"]["app_role"]
+          _target_user_id: string
+        }
+        Returns: undefined
+      }
+      admin_update_profile: {
+        Args: { _display_name: string; _email: string; _target_user_id: string }
+        Returns: undefined
+      }
       consume_points: {
         Args: {
           _amount: number
