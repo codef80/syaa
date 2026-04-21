@@ -13,28 +13,46 @@ interface AIChatMessage {
 
 async function callLovableAI(messages: AIChatMessage[], model: string): Promise<string> {
   const apiKey = process.env.LOVABLE_API_KEY;
-  if (!apiKey) throw new Error("LOVABLE_API_KEY غير مُعد");
+  if (!apiKey) {
+    console.error("[AI] LOVABLE_API_KEY missing in env");
+    throw new Error("LOVABLE_API_KEY غير مُعد");
+  }
 
-  const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ model, messages }),
-  });
+  let res: Response;
+  try {
+    res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ model, messages }),
+    });
+  } catch (fetchErr) {
+    console.error("[AI] fetch failed:", fetchErr);
+    throw new Error("تعذّر الاتصال بخدمة الذكاء الاصطناعي");
+  }
 
   if (res.status === 429) throw new Error("تم تجاوز حد الطلبات، حاول بعد قليل");
   if (res.status === 402) throw new Error("نفدت الأرصدة، يرجى التواصل مع الدعم");
   if (!res.ok) {
-    const t = await res.text();
-    console.error("AI gateway error:", res.status, t);
-    throw new Error("فشل توليد المحتوى");
+    const t = await res.text().catch(() => "");
+    console.error("[AI] gateway error:", res.status, t.slice(0, 500));
+    throw new Error(`فشل توليد المحتوى (${res.status})`);
   }
 
-  const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
+  let data: { choices?: { message?: { content?: string } }[] };
+  try {
+    data = await res.json();
+  } catch (parseErr) {
+    console.error("[AI] JSON parse failed:", parseErr);
+    throw new Error("استجابة غير صالحة من خدمة الذكاء");
+  }
   const content = data.choices?.[0]?.message?.content;
-  if (!content) throw new Error("لم يُرجع المحتوى");
+  if (!content) {
+    console.error("[AI] empty content:", JSON.stringify(data).slice(0, 500));
+    throw new Error("لم يُرجع المحتوى");
+  }
   return content;
 }
 
@@ -82,7 +100,8 @@ export const generateContent = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
     const tool = data.tool as ToolKey;
     const cost = TOOL_COSTS[tool];
-    if (!cost) throw new Error("أداة غير معروفة");
+    console.log(`[generate] tool=${tool} user=${userId} cost=${cost}`);
+    if (!cost) throw new Error(`أداة غير معروفة: ${tool}`);
 
     // 1. Consume points (atomic) — RPC bypasses RLS via SECURITY DEFINER
     const { data: consumed, error: consumeErr } = await supabase.rpc("consume_points", {
@@ -91,8 +110,12 @@ export const generateContent = createServerFn({ method: "POST" })
       _tool: tool,
       _description: TOOL_LABELS[tool] ?? tool,
     });
-    if (consumeErr) throw new Error(consumeErr.message);
+    if (consumeErr) {
+      console.error("[generate] consume_points error:", consumeErr);
+      throw new Error(`فشل خصم النقاط: ${consumeErr.message}`);
+    }
     if (!consumed) throw new Error("الرصيد غير كافٍ. يرجى ترقية الباقة.");
+    console.log(`[generate] points consumed OK`);
 
     // 2. Build prompt
     const sysPrompt = buildSystemPrompt({
