@@ -14,16 +14,359 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      brand_settings: {
+        Row: {
+          brand_description: string | null
+          brand_voice: string | null
+          protected_terms: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          brand_description?: string | null
+          brand_voice?: string | null
+          protected_terms?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          brand_description?: string | null
+          brand_voice?: string | null
+          protected_terms?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      generated_content: {
+        Row: {
+          created_at: string
+          id: string
+          input: Json | null
+          is_favorite: boolean
+          metadata: Json | null
+          output: string
+          points_used: number
+          tool: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          input?: Json | null
+          is_favorite?: boolean
+          metadata?: Json | null
+          output: string
+          points_used?: number
+          tool: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          input?: Json | null
+          is_favorite?: boolean
+          metadata?: Json | null
+          output?: string
+          points_used?: number
+          tool?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      points_balance: {
+        Row: {
+          balance: number
+          total_earned: number
+          total_spent: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          balance?: number
+          total_earned?: number
+          total_spent?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          balance?: number
+          total_earned?: number
+          total_spent?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      product_profiles: {
+        Row: {
+          audience: string | null
+          created_at: string
+          description: string | null
+          features: string | null
+          id: string
+          name: string
+          preferred_dialect: string | null
+          preferred_tone: string | null
+          price: string | null
+          protected_terms: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          audience?: string | null
+          created_at?: string
+          description?: string | null
+          features?: string | null
+          id?: string
+          name: string
+          preferred_dialect?: string | null
+          preferred_tone?: string | null
+          price?: string | null
+          protected_terms?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          audience?: string | null
+          created_at?: string
+          description?: string | null
+          features?: string | null
+          id?: string
+          name?: string
+          preferred_dialect?: string | null
+          preferred_tone?: string | null
+          price?: string | null
+          protected_terms?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          default_dialect: string | null
+          default_platform: string | null
+          display_name: string | null
+          email: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          default_dialect?: string | null
+          default_platform?: string | null
+          display_name?: string | null
+          email?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          default_dialect?: string | null
+          default_platform?: string | null
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      saved_templates: {
+        Row: {
+          category: string | null
+          content: string
+          created_at: string
+          id: string
+          is_favorite: boolean
+          title: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          content: string
+          created_at?: string
+          id?: string
+          is_favorite?: boolean
+          title: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          is_favorite?: boolean
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      subscription_requests: {
+        Row: {
+          amount_sar: number
+          created_at: string
+          id: string
+          notes: string | null
+          plan: Database["public"]["Enums"]["subscription_plan"]
+          points_to_grant: number
+          proof_url: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["subscription_status"]
+          user_id: string
+        }
+        Insert: {
+          amount_sar: number
+          created_at?: string
+          id?: string
+          notes?: string | null
+          plan: Database["public"]["Enums"]["subscription_plan"]
+          points_to_grant: number
+          proof_url?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["subscription_status"]
+          user_id: string
+        }
+        Update: {
+          amount_sar?: number
+          created_at?: string
+          id?: string
+          notes?: string | null
+          plan?: Database["public"]["Enums"]["subscription_plan"]
+          points_to_grant?: number
+          proof_url?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["subscription_status"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      system_templates: {
+        Row: {
+          category: string | null
+          content: string
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          title: string
+        }
+        Insert: {
+          category?: string | null
+          content: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          title: string
+        }
+        Update: {
+          category?: string | null
+          content?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          title?: string
+        }
+        Relationships: []
+      }
+      transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json | null
+          type: Database["public"]["Enums"]["transaction_type"]
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          type: Database["public"]["Enums"]["transaction_type"]
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          type?: Database["public"]["Enums"]["transaction_type"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      consume_points: {
+        Args: {
+          _amount: number
+          _description: string
+          _tool: string
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      grant_points: {
+        Args: {
+          _amount: number
+          _description: string
+          _type: Database["public"]["Enums"]["transaction_type"]
+          _user_id: string
+        }
+        Returns: undefined
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      subscription_plan: "basic" | "pro" | "business"
+      subscription_status: "pending" | "approved" | "rejected"
+      transaction_type:
+        | "signup_bonus"
+        | "consumption"
+        | "subscription"
+        | "admin_grant"
+        | "refund"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +493,17 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      subscription_plan: ["basic", "pro", "business"],
+      subscription_status: ["pending", "approved", "rejected"],
+      transaction_type: [
+        "signup_bonus",
+        "consumption",
+        "subscription",
+        "admin_grant",
+        "refund",
+      ],
+    },
   },
 } as const
