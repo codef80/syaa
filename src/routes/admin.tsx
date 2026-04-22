@@ -37,9 +37,19 @@ import {
   Plus,
   Crown,
   UserMinus,
+  Cpu,
 } from "lucide-react";
 import { toast } from "sonner";
 import { PLAN_DETAILS } from "@/lib/tools";
+
+const FLASH_MODELS = [
+  { value: "google/gemini-2.5-flash", label: "Gemini 2.5 Flash (افتراضي)" },
+  { value: "google/gemini-3-flash-preview", label: "Gemini 3 Flash Preview" },
+] as const;
+const PRO_MODELS = [
+  { value: "google/gemini-2.5-pro", label: "Gemini 2.5 Pro (افتراضي)" },
+  { value: "google/gemini-3.1-pro-preview", label: "Gemini 3.1 Pro Preview" },
+] as const;
 
 export const Route = createFileRoute("/admin")({
   component: () => (
@@ -82,7 +92,7 @@ interface Stats {
   contentCount: number;
 }
 
-type Tab = "stats" | "requests" | "users" | "templates";
+type Tab = "stats" | "requests" | "users" | "templates" | "models";
 
 function Admin() {
   const { isAdmin, loading, user: me } = useAuth();
