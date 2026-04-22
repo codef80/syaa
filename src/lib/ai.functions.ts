@@ -6,12 +6,12 @@ import { z } from "zod";
 const DEFAULT_FLASH = "google/gemini-2.5-flash";
 const DEFAULT_PRO = "google/gemini-2.5-pro";
 
-async function resolveModels(supabase: { from: (t: string) => { select: (c: string) => { maybeSingle: () => Promise<{ data: { flash_model: string; pro_model: string } | null }> } } }) {
+async function resolveModels(supabase: { from: (t: string) => any }) {
   try {
     const { data } = await supabase.from("ai_model_settings").select("flash_model, pro_model").maybeSingle();
     return {
-      flash: data?.flash_model || DEFAULT_FLASH,
-      pro: data?.pro_model || DEFAULT_PRO,
+      flash: (data as { flash_model?: string } | null)?.flash_model || DEFAULT_FLASH,
+      pro: (data as { pro_model?: string } | null)?.pro_model || DEFAULT_PRO,
     };
   } catch (err) {
     console.error("[AI] failed to load model settings, using defaults:", err);
