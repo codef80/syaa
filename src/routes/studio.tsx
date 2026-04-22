@@ -19,6 +19,7 @@ import { Wand2, Coins, Copy, Heart, Save, FileDown, Loader2, Link as LinkIcon, P
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { generateContent, fetchUrlContent } from "@/lib/ai.functions";
+import { unwrapServerFn, type GenerateResult } from "@/lib/server-fn";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 
