@@ -79,6 +79,27 @@ function AuthPage() {
     }
   };
 
+  const resetPassword = async () => {
+    try {
+      emailSchema.parse(email);
+    } catch {
+      toast.error("اكتب بريدك أولاً ثم اضغط استعادة كلمة المرور");
+      return;
+    }
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth?mode=login`,
+      });
+      if (error) throw error;
+      toast.success("تم إرسال رابط استعادة كلمة المرور إلى بريدك");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "تعذّر إرسال رابط الاستعادة");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
       <div className="absolute inset-0 -z-10 gradient-soft" />
