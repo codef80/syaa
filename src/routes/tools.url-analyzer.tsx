@@ -10,6 +10,7 @@ import { Search, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { fetchUrlContent } from "@/lib/ai.functions";
+import { unwrapServerFn } from "@/lib/server-fn";
 
 export const Route = createFileRoute("/tools/url-analyzer")({
   component: () => (
