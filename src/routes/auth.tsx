@@ -146,6 +146,17 @@ function AuthPage() {
               {loading ? "جاري..." : mode === "signup" ? "إنشاء الحساب" : "دخول"}
               {!loading && <ArrowRight className="h-4 w-4 rotate-180" />}
             </Button>
+
+            {mode === "login" && (
+              <button
+                type="button"
+                onClick={resetPassword}
+                disabled={loading}
+                className="block w-full text-center text-xs text-muted-foreground hover:text-primary"
+              >
+                نسيت كلمة المرور؟
+              </button>
+            )}
           </form>
 
           <div className="mt-6 text-center text-sm">
