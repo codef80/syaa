@@ -95,13 +95,14 @@ function Studio() {
     }
     setFetchingUrl(true);
     try {
-      const res = await fetchUrl({ data: { url } });
-      if (res.ok) {
+      const raw = await fetchUrl({ data: { url } });
+      const res = unwrapServerFn<{ ok: boolean; title?: string; description?: string; text?: string; error?: string }>(raw);
+      if (res?.ok) {
         const text = [res.title, res.description, res.text].filter(Boolean).join("\n\n");
         setInput(text);
         toast.success("تم جلب محتوى الرابط");
       } else {
-        toast.error(res.error ?? "تعذّر الجلب — الصق المحتوى يدوياً");
+        toast.error(res?.error ?? "تعذّر الجلب — الصق المحتوى يدوياً");
       }
     } catch {
       toast.error("فشل جلب الرابط");
