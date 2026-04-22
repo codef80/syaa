@@ -121,14 +121,20 @@ function Admin() {
   }, [loading, isAdmin, navigate]);
 
   const load = async () => {
-    const [reqsRes, profilesRes, balancesRes, rolesRes, tplsRes, contentRes] = await Promise.all([
+    const [reqsRes, profilesRes, balancesRes, rolesRes, tplsRes, contentRes, modelsRes] = await Promise.all([
       supabase.from("subscription_requests").select("*").order("created_at", { ascending: false }),
       supabase.from("profiles").select("id, email, display_name"),
       supabase.from("points_balance").select("user_id, balance, total_earned, total_spent"),
       supabase.from("user_roles").select("user_id, role"),
       supabase.from("system_templates").select("*").order("created_at", { ascending: false }),
       supabase.from("generated_content").select("id", { count: "exact", head: true }),
+      supabase.from("ai_model_settings").select("flash_model, pro_model").maybeSingle(),
     ]);
+
+    if (modelsRes.data) {
+      setFlashModel(modelsRes.data.flash_model);
+      setProModel(modelsRes.data.pro_model);
+    }
 
     setRequests((reqsRes.data ?? []) as SubReq[]);
 
