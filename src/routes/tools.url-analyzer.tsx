@@ -31,12 +31,13 @@ function UrlAnalyzer() {
     if (!url) return;
     setLoading(true);
     try {
-      const r = await fetchUrl({ data: { url } });
-      if (r.ok) {
+      const raw = await fetchUrl({ data: { url } });
+      const r = unwrapServerFn<{ ok: boolean; title?: string; description?: string; text?: string; error?: string }>(raw);
+      if (r?.ok) {
         setFetched([r.title, r.description, r.text].filter(Boolean).join("\n\n"));
         toast.success("تم جلب الرابط");
       } else {
-        toast.error(r.error ?? "تعذّر الجلب");
+        toast.error(r?.error ?? "تعذّر الجلب");
       }
     } finally {
       setLoading(false);
