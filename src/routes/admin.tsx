@@ -561,7 +561,82 @@ function Admin() {
         </div>
       )}
 
-      {/* Edit Profile Dialog */}
+      {/* Models */}
+      {tab === "models" && (
+        <div className="space-y-5">
+          <div className="rounded-2xl border bg-card p-5 shadow-soft">
+            <div className="flex items-start gap-3">
+              <Cpu className="mt-1 h-5 w-5 text-primary" />
+              <div className="flex-1 space-y-1">
+                <h2 className="font-bold">إعدادات نماذج الذكاء الاصطناعي</h2>
+                <p className="text-sm text-muted-foreground">
+                  اختر النموذج المُستخدم لكل فئة. يطبَّق التغيير فوراً على جميع الأدوات.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-5 md:grid-cols-2">
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold">نموذج Flash (للأدوات السريعة)</label>
+                <p className="text-xs text-muted-foreground">يُستخدم في: تدقيق، اختصار، إعادة صياغة خفيفة</p>
+                <div className="space-y-2">
+                  {FLASH_MODELS.map((m) => (
+                    <label
+                      key={m.value}
+                      className={`flex cursor-pointer items-center gap-2 rounded-xl border p-3 text-sm transition ${
+                        flashModel === m.value ? "border-primary bg-primary/5" : "hover:bg-muted/50"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="flash"
+                        value={m.value}
+                        checked={flashModel === m.value}
+                        onChange={() => setFlashModel(m.value)}
+                      />
+                      <span className="font-medium">{m.label}</span>
+                      <code className="ml-auto text-xs text-muted-foreground">{m.value}</code>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold">نموذج Pro (للأدوات الاحترافية)</label>
+                <p className="text-xs text-muted-foreground">يُستخدم في: تحليل روابط، خطافات، CTA، خطة أسبوعية، استوديو…</p>
+                <div className="space-y-2">
+                  {PRO_MODELS.map((m) => (
+                    <label
+                      key={m.value}
+                      className={`flex cursor-pointer items-center gap-2 rounded-xl border p-3 text-sm transition ${
+                        proModel === m.value ? "border-primary bg-primary/5" : "hover:bg-muted/50"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="pro"
+                        value={m.value}
+                        checked={proModel === m.value}
+                        onChange={() => setProModel(m.value)}
+                      />
+                      <span className="font-medium">{m.label}</span>
+                      <code className="ml-auto text-xs text-muted-foreground">{m.value}</code>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-5 flex justify-end">
+              <Button onClick={saveModels} disabled={savingModels} className="gap-2">
+                {savingModels ? "جاري الحفظ..." : "حفظ الإعدادات"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+
       <Dialog open={!!editUser} onOpenChange={(o) => !o && setEditUser(null)}>
         <DialogContent>
           <DialogHeader>
