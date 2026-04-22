@@ -36,22 +36,24 @@ export const TOOL_COSTS: Record<ToolKey, number> = {
   studio_generate: 12,
 };
 
+// Pro is the default for substantive tools. Flash only for ultra-light utilities.
+// Do NOT change a tool's model without explicit user approval.
 export const TOOL_MODELS: Record<ToolKey, "flash" | "pro"> = {
-  url_analyzer_short: "flash",
+  url_analyzer_short: "pro",
   url_analyzer_pro: "pro",
-  magic_transformer: "flash",
-  hook_generator: "flash",
-  smart_reply: "flash",
-  dialect_switcher: "flash",
-  cta_generator: "flash",
-  ab_variants: "flash",
-  seo_local: "flash",
+  magic_transformer: "pro",
+  hook_generator: "pro",
+  smart_reply: "pro",
+  dialect_switcher: "pro",
+  cta_generator: "pro",
+  ab_variants: "pro",
+  seo_local: "pro",
   offer_pack: "pro",
   weekly_plan: "pro",
   proofread: "flash",
   shortener: "flash",
   rewrite_light: "flash",
-  studio_generate: "flash",
+  studio_generate: "pro",
 };
 
 export const TOOL_LABELS: Record<ToolKey, string> = {

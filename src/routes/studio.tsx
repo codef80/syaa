@@ -19,6 +19,7 @@ import { Wand2, Coins, Copy, Heart, Save, FileDown, Loader2, Link as LinkIcon, P
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { generateContent, fetchUrlContent } from "@/lib/ai.functions";
+import { unwrapServerFn, type GenerateResult } from "@/lib/server-fn";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 
@@ -94,13 +95,14 @@ function Studio() {
     }
     setFetchingUrl(true);
     try {
-      const res = await fetchUrl({ data: { url } });
-      if (res.ok) {
+      const raw = await fetchUrl({ data: { url } });
+      const res = unwrapServerFn<{ ok: boolean; title?: string; description?: string; text?: string; error?: string }>(raw);
+      if (res?.ok) {
         const text = [res.title, res.description, res.text].filter(Boolean).join("\n\n");
         setInput(text);
         toast.success("تم جلب محتوى الرابط");
       } else {
-        toast.error(res.error ?? "تعذّر الجلب — الصق المحتوى يدوياً");
+        toast.error(res?.error ?? "تعذّر الجلب — الصق المحتوى يدوياً");
       }
     } catch {
       toast.error("فشل جلب الرابط");
@@ -122,7 +124,7 @@ function Studio() {
     setLoading(true);
     setOutput("");
     try {
-      const res = await generate({
+      const raw = await generate({
         data: {
           tool: "studio_generate",
           prompt: input,
@@ -137,9 +139,15 @@ function Studio() {
           protectedTerms: protectedTerms || undefined,
         } as never,
       });
+      const res = unwrapServerFn<GenerateResult>(raw);
+      if (!res || typeof res.output !== "string" || !res.output.trim()) {
+        console.error("Unexpected studio response:", raw);
+        throw new Error("لم يصل محتوى من الخادم");
+      }
       setOutput(res.output);
       setOutputId(res.id ?? null);
-      toast.success(`تم التوليد! استُهلك ${res.pointsUsed} نقطة`);
+      const used = typeof res.pointsUsed === "number" ? res.pointsUsed : cost;
+      toast.success(`تم التوليد! استُهلك ${used} نقطة`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "حدث خطأ");
     } finally {

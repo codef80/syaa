@@ -158,20 +158,30 @@ export const generateContent = createServerFn({ method: "POST" })
       throw new Error(msg);
     }
 
-    // 4. Save output
-    const { data: saved } = await supabase
-      .from("generated_content")
-      .insert({
-        user_id: userId,
-        tool,
-        input: data as never,
-        output,
-        points_used: cost,
-      })
-      .select("id")
-      .single();
+    // 4. Save output (failure here should NOT silently swallow)
+    let savedId: string | undefined;
+    try {
+      const { data: saved, error: saveErr } = await supabase
+        .from("generated_content")
+        .insert({
+          user_id: userId,
+          tool,
+          input: data as never,
+          output,
+          points_used: cost,
+        })
+        .select("id")
+        .single();
+      if (saveErr) {
+        console.error("[generate] save error (non-fatal):", saveErr);
+      } else {
+        savedId = saved?.id;
+      }
+    } catch (saveCatch) {
+      console.error("[generate] save threw:", saveCatch);
+    }
 
-    return { output, id: saved?.id, pointsUsed: cost };
+    return { success: true, output, id: savedId, pointsUsed: cost, model };
   });
 
 function buildUserPrompt(tool: ToolKey, d: z.infer<typeof inputSchema>): string {
