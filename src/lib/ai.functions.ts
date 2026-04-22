@@ -3,8 +3,21 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { TOOL_COSTS, TOOL_MODELS, TOOL_LABELS, type ToolKey } from "@/lib/tools";
 import { z } from "zod";
 
-const MODEL_FLASH = "google/gemini-2.5-flash";
-const MODEL_PRO = "google/gemini-2.5-pro";
+const DEFAULT_FLASH = "google/gemini-2.5-flash";
+const DEFAULT_PRO = "google/gemini-2.5-pro";
+
+async function resolveModels(supabase: { from: (t: string) => any }) {
+  try {
+    const { data } = await supabase.from("ai_model_settings").select("flash_model, pro_model").maybeSingle();
+    return {
+      flash: (data as { flash_model?: string } | null)?.flash_model || DEFAULT_FLASH,
+      pro: (data as { pro_model?: string } | null)?.pro_model || DEFAULT_PRO,
+    };
+  } catch (err) {
+    console.error("[AI] failed to load model settings, using defaults:", err);
+    return { flash: DEFAULT_FLASH, pro: DEFAULT_PRO };
+  }
+}
 
 interface AIChatMessage {
   role: "system" | "user" | "assistant";
@@ -131,7 +144,8 @@ export const generateContent = createServerFn({ method: "POST" })
     });
 
     const userPrompt = buildUserPrompt(tool, data);
-    const model = TOOL_MODELS[tool] === "pro" ? MODEL_PRO : MODEL_FLASH;
+    const models = await resolveModels(supabase);
+    const model = TOOL_MODELS[tool] === "pro" ? models.pro : models.flash;
 
     // 3. Call AI
     let output: string;
