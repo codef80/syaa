@@ -124,7 +124,7 @@ function Studio() {
     setLoading(true);
     setOutput("");
     try {
-      const res = await generate({
+      const raw = await generate({
         data: {
           tool: "studio_generate",
           prompt: input,
@@ -139,9 +139,15 @@ function Studio() {
           protectedTerms: protectedTerms || undefined,
         } as never,
       });
+      const res = unwrapServerFn<GenerateResult>(raw);
+      if (!res || typeof res.output !== "string" || !res.output.trim()) {
+        console.error("Unexpected studio response:", raw);
+        throw new Error("لم يصل محتوى من الخادم");
+      }
       setOutput(res.output);
       setOutputId(res.id ?? null);
-      toast.success(`تم التوليد! استُهلك ${res.pointsUsed} نقطة`);
+      const used = typeof res.pointsUsed === "number" ? res.pointsUsed : cost;
+      toast.success(`تم التوليد! استُهلك ${used} نقطة`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "حدث خطأ");
     } finally {
