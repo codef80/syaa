@@ -112,6 +112,9 @@ function Admin() {
   const [deleteUser, setDeleteUser] = useState<UserRow | null>(null);
   const [editTpl, setEditTpl] = useState<SystemTpl | null>(null);
   const [deleteTpl, setDeleteTpl] = useState<SystemTpl | null>(null);
+  const [flashModel, setFlashModel] = useState<string>("google/gemini-2.5-flash");
+  const [proModel, setProModel] = useState<string>("google/gemini-2.5-pro");
+  const [savingModels, setSavingModels] = useState(false);
 
   useEffect(() => {
     if (!loading && !isAdmin) navigate({ to: "/dashboard" });
