@@ -286,6 +286,18 @@ function Admin() {
     load();
   };
 
+  // === AI Models ===
+  const saveModels = async () => {
+    setSavingModels(true);
+    const { error } = await supabase.rpc("admin_update_ai_models", {
+      _flash_model: flashModel,
+      _pro_model: proModel,
+    });
+    setSavingModels(false);
+    if (error) return toast.error(error.message);
+    toast.success("تم حفظ إعدادات النماذج");
+  };
+
   if (loading || !isAdmin)
     return <div className="text-center text-muted-foreground">جاري التحقق...</div>;
 
@@ -308,6 +320,7 @@ function Admin() {
             { k: "requests", l: `الطلبات (${pendingCount})`, i: Coins },
             { k: "users", l: `المستخدمون (${users.length})`, i: Users },
             { k: "templates", l: `القوالب (${templates.length})`, i: FileText },
+            { k: "models", l: "النماذج", i: Cpu },
           ] as const
         ).map((t) => (
           <button
