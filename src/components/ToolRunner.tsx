@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { generateContent } from "@/lib/ai.functions";
 import { TOOL_COSTS, TOOL_LABELS, type ToolKey } from "@/lib/tools";
+import { unwrapServerFn, type GenerateResult } from "@/lib/server-fn";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 
