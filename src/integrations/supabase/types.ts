@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_model_settings: {
+        Row: {
+          flash_model: string
+          id: boolean
+          pro_model: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          flash_model?: string
+          id?: boolean
+          pro_model?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          flash_model?: string
+          id?: boolean
+          pro_model?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       brand_settings: {
         Row: {
           brand_description: string | null
@@ -344,6 +368,10 @@ export type Database = {
           _new_role: Database["public"]["Enums"]["app_role"]
           _target_user_id: string
         }
+        Returns: undefined
+      }
+      admin_update_ai_models: {
+        Args: { _flash_model: string; _pro_model: string }
         Returns: undefined
       }
       admin_update_profile: {
